@@ -93,13 +93,13 @@ def build_model():
     return cv
 
 
-def evaluate_model(model, X_test, Y_test, category_names):
+def evaluate_model(model, X_test, y_test, category_names):
     '''
     Evaluate model performance using test data
     Input: 
         model: Model to be evaluated
         X_test: Test data (features)
-        Y_test: True lables for Test data
+        y_test: True lables for Test data
         category_names: Labels for 36 categories
     Output:
         Print accuracy and classfication report for each category
