@@ -22,14 +22,25 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from sklearn.multioutput import MultiOutputClassifier
 from sklearn.metrics import classification_report, accuracy_score
+import pickle
 
 
 def load_data(database_filepath):
+    '''
+    Loading database from sql engine
+    
+    input: 
+        database filepath
+    output:
+        the message
+        the catogories for the message
+        the names of the categories
+    '''
     # load data from database
     engine = create_engine('sqlite:///' + database_filepath )
     df = pd.read_sql(database_filepath,engine)
     X = df.message.values
-    Y = df.iloc[:, 5:]
+    Y = df.iloc[:, 4:]
     category_names = list(df.columns[4:])
     return X, Y, category_names
     
@@ -90,7 +101,7 @@ def build_model():
                  }
     cv = GridSearchCV(pipeline, param_grid=parameters)
 
-    return cv
+    return cv 
 
 
 def evaluate_model(model, X_test, y_test, category_names):

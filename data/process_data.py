@@ -5,6 +5,15 @@ import numpy as np
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    '''
+    Loading data from csv file
+    
+    input:
+        messages_filepath: filepath to message data
+        categories_filepath: filepath to categories data
+    output:
+        df: Merged dataset from messages and categories
+    '''
     #load data from files
     messages = pd.read_csv(messages_filepath)
     categories = pd.read_csv(categories_filepath)
@@ -15,6 +24,12 @@ def load_data(messages_filepath, categories_filepath):
 
 
 def clean_data(df):
+    '''
+    Input:
+        df: Merged dataset from messages and categories
+    Output:
+        df: Cleaned dataset
+    '''
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(';',n = 36, expand = True)
 
